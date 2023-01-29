@@ -10,7 +10,7 @@ describe("home page", () => {
         .contains("Testing Next.js Applications with Cypress")
     })
 
-    it.only("the features on the home page are correct", () => {
+    it("the features on the home page are correct", () => {
       cy.get("dt")
         .eq(0)
         .contains(/4 courses/i)
@@ -18,6 +18,23 @@ describe("home page", () => {
       cy.get("dt")
         .eq(2)
         .contains(/free and open source/i)
+    })
+  })
+
+  context("courses section", () => {
+    it("Course: Testing Your First Next.js Application", () => {
+      cy.getByData("course-0").find("a").eq(3).click()
+      cy.location("pathname").should("eq", "/testing-your-first-application")
+    })
+
+    it("Course: Testing Foundations", () => {
+      cy.getByData("course-1").find("a").eq(3).click()
+      cy.location("pathname").should("eq", "/testing-foundations")
+    })
+
+    it("Course: Cypress Fundamentals", () => {
+      cy.getByData("course-2").find("a").eq(3).click()
+      cy.location("pathname").should("eq", "/cypress-fundamentals")
     })
   })
 })
